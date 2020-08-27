@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap"
+      rel="stylesheet"
+    />
+
+    <script
+      type="text/javascript"
+      src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"
+    ></script>
+
+    <title>זמני כניסת שבת</title>
+
+    <style>
+      table {
+        direction: rtl;
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 20px;
+        padding: 10px;
+        position: relative;
+        top: 55px;
+        right: 65px;
+      }
+      td {
+        text-align: center;
+        border-bottom: 1px solid black;
+        cursor: pointer;
+        font-family: "Varela Round", sans-serif;
+        font-size: 16pt;
+        padding: 7px;
+      }
+      tr:first-child > td {
+        font-weight: bold;
+      }
+      td:first-child {
+        font-weight: bold;
+      }
+      .container {
+        width: 500px;
+        height: 708px;
+        background-color: aquamarine;
+        margin: auto;
+        direction: rtl;
+        background-image: url("1.jpg");
+        background-repeat: no-repeat;
+        position: relative;
+        background-size: contain;
+        top: 50px;
+      }
+      p {
+        direction: rtl;
+        font-family: "Varela Round", sans-serif;
+        font-size: 35pt;
+        padding: 200px 40px 20px 20px;
+        color: midnightblue;
+        font-weight: bold;
+        text-shadow: 5px 5px 7px white;
+        position: absolute;
+        top: -230px;
+        right: 0px;
+        z-index: 1000;
+        cursor: pointer;
+      }
+
+      canvas {
+        display: none;
+        margin: auto;
+      }
+      #btn {
+        position: absolute;
+        top: 10px;
+        text-decoration: none;
+        background-color: brown;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 20px;
+        font-family: sans-serif;
+      }
+      #btn:hover {
+        background-color: crimson;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="content" class="container">
+      <p id="theP" ondblclick="myPfunction()">פרשת&nbspשמות</p>
+      <table>
+        <rt>
+          <td>עיר</td>
+          <td>כניסת&nbspשבת</td>
+          <td>יציאת&nbspשבת</td>
+        </rt>
+        <tr>
+          <td>ירושלים</td>
+          <td>17:30</td>
+          <td>18:30</td>
+        </tr>
+        <tr>
+          <td>בני&nbspברק</td>
+          <td>17:30</td>
+          <td>18:30</td>
+        </tr>
+        <tr>
+          <td>קרית&nbspיערים</td>
+          <td>17:30</td>
+          <td>18:30</td>
+        </tr>
+        <tr>
+          <td>בית&nbspשמש</td>
+          <td>17:30</td>
+          <td>18:30</td>
+        </tr>
+        <tr>
+          <td>כרמיאל</td>
+          <td>17:30</td>
+          <td>18:30</td>
+        </tr>
+        <tr>
+          <td>קרית&nbspספר</td>
+          <td>17:30</td>
+          <td>18:30</td>
+        </tr>
+      </table>
+    </div>
+
+    <center>
+      <a href="#" id="btn">הורד לוח</a>
+    </center>
+    <a style="display: none" href="#" id="r">הורד</a>
+
+    <script>
+      function myFunction() {
+        var x, i;
+        x = document.querySelectorAll("td");
+        for (i = 0; i < x.length; i++) {
+          x[i].addEventListener("dblclick", function editor() {
+            //alert("sdfsdf");
+            c = prompt() + "&nbsp;";
+            if (c == "" || c == " ") {
+              alert("לא הוכנס ערך.. נסה שוב");
+            } else {
+              c.replace(" ", "&nbsp;");
+              this.innerHTML = c;
+            }
+          });
+        }
+      }
+      myFunction();
+
+      //תיקון רווחים
+      function myFזגדגכunction() {
+        var str = "How are you doing today?";
+        var res = str.split(" ");
+        for (i = 0; i < res.length; i++) {
+          document.getElementById("demo").innerHTML += res[i] + "&nbsp;";
+        }
+      }
+    </script>
+
+    <script>
+      const div = document.querySelector("#content");
+      //div.innerText = div.innerText.split(' ').join(''); // just for overflowing content
+      btn = document.getElementById("btn");
+      btn.addEventListener("click", (event) => {
+        html2canvas(div, {
+          width: div.scrollWidth,
+          height: div.scrollHeight,
+        }).then((canvas) => {
+          document.body.appendChild(canvas);
+          console.log(canvas.width, canvas.height); // outputs greater width than browser width
+
+          //my code..
+          a = document.getElementById("r");
+          c = document.getElementsByTagName("canvas")[0];
+          a.setAttribute("download", "Sabat.png");
+          a.setAttribute("href", c.toDataURL());
+
+          c.toDataURL();
+
+          a.click();
+        });
+      });
+    </script>
+    <script>
+      function myPfunction() {
+        temp = prompt("הכנס שם פרשה..");
+        if (temp != "" && temp != " " && temp != "  ") {
+          document.getElementById("theP").innerHTML = "";
+          moreTemp = temp.split(" ");
+
+          for (let index = 0; index < moreTemp.length; index++) {
+            document.getElementById("theP").innerHTML +=
+              moreTemp[index] + "&nbsp";
+          }
+        } else {
+          alert("הכנס שם פרשה מתאים..");
+        }
+      }
+    </script>
+  </body>
+</html>
